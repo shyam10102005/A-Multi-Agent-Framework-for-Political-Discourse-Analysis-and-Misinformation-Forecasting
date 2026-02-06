@@ -20,7 +20,9 @@ A multi-agent framework designed for political discourse analysis, automated fac
 - **Source Frequency Analysis**: Identifies which domains are propagating the claim.
 - **Misinformation Risk Assessment**: Calculates a risk level (LOW/MEDIUM/HIGH) based on the spread and nature of sources.
 
-## 🛠️ Installation
+## � How to Run
+
+### Option 1: Local Code Editor (VS Code, PyCharm, Terminal)
 
 1. **Clone the repository**:
    ```bash
@@ -33,23 +35,31 @@ A multi-agent framework designed for political discourse analysis, automated fac
    pip install -r requirements.txt
    ```
 
-## 🔑 Configuration
+3. **Configure API Key**:
+   You need a **Tavily API Key** for the search functionality.
+   - Open `main.py`.
+   - Find `os.environ["TAVILY_API_KEY"] = " "`
+   - Insert your key: `os.environ["TAVILY_API_KEY"] = "tvly-..."`
 
-You need a **Tavily API Key** for the search functionality to work.
-
-1. Open `main.py`.
-2. Find the line:
-   ```python
-   os.environ["TAVILY_API_KEY"] = " "
+4. **Run the application**:
+   ```bash
+   python main.py
    ```
-3. Insert your API key inside the quotes.
+   The application will launch in your browser at `http://127.0.0.1:7860`.
 
-## ▶️ Usage
+### Option 2: Google Colab
 
-Run the application:
-```bash
-python main.py
-```
+1. Create a new Colab notebook.
+2. Copy the contents of `main.py` into a cell.
+3. Uncomment the first line to install dependencies:
+   ```python
+   !pip install gradio transformers sentence-transformers tavily-python wikipedia diskcache torch --quiet
+   ```
+4. Set your API key in the code:
+    ```python
+    os.environ["TAVILY_API_KEY"] = "YOUR_API_KEY"
+    ```
+5. Run the cell. The Gradio interface will launch directly in the notebook.
 
 The application will launch a **Gradio** interface in your browser (usually at `http://127.0.0.1:7860`).
 
