@@ -1,0 +1,7 @@
+gradio
+torch
+wikipedia
+tavily-python
+sentence-transformers
+transformers
+diskcache

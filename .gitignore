@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+tavily_cache/
+.env
+venv/
+.DS_Store
