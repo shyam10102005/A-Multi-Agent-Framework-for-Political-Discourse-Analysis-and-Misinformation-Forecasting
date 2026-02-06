@@ -1,77 +1,81 @@
 # 🧠 Political Intelligence System
+**A Multi-Agent Framework for Political Discourse Analysis and Misinformation Forecasting**
 
-A multi-agent framework designed for political discourse analysis, automated fact-checking, and misinformation forecasting. This system leverages Large Language Models (LLMs), search APIs, and sentiment analysis to provide real-time insights into political claims and debates.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Gradio](https://img.shields.io/badge/UI-Gradio-orange.svg)](https://gradio.app/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## 🚀 Features
+## 📋 Overview
+[cite_start]This framework is an integrated AI-driven solution designed to verify political claims, evaluate the rhetorical quality of debates, and forecast the spread of misinformation[cite: 780, 804]. [cite_start]By combining **Retrieval-Augmented Generation (RAG)** with multi-agent orchestration, the system provides real-time, evidence-based insights into evolving political narratives[cite: 781, 1023].
+
+## 🚀 Key Features
 
 ### 1. 🔍 Automated Fact-Checking
-- **Multi-Source Evidence Retrieval**: Aggregates information from **Tavily** (web search) and **Wikipedia**.
-- **Rule-Based Verification**: Instantly flags inconsistencies in dates, numbers, and historical facts.
-- **LLM Reasoning**: Uses **Google's Flan-T5** model to synthesize evidence and provide a reasoned verdict (User-friendly explanation).
-- **Source Transparency**: Displays all sources used for verification with summaries.
+* [cite_start]**Dynamic RAG Pipeline**: Aggregates real-time evidence from **Tavily Search** and **Wikipedia**[cite: 72, 73, 1022].
+* [cite_start]**Intelligent Reranking**: Uses a **Cross-Encoder** (MS MARCO MiniLM) to ensure only the most relevant evidence is processed[cite: 165, 1114].
+* [cite_start]**Explainable Verdicts**: Generates verdicts (True/False/Misleading/Unverified) using **Google's Flan-T5** with grounded reasoning to minimize hallucinations[cite: 136, 164, 1115].
 
-### 2. 🗣 Debate Analysis
-- **Sentiment Analysis**: Determines the emotional tone of political speeches or debates.
-- **Bias Detection**: Identifies positive or negative bias.
-- **Logical Fallacy Detection**: Detects common rhetorical fallacies like "Slippery Slope", "False Dilemma", and "Appeal to Fear".
+### 2. 🗣 Debate & Rhetoric Analysis
+* [cite_start]**Sentiment & Stance**: Identifies emotional polarity and partisan framing using fine-tuned **DistilBERT** models[cite: 166, 1119].
+* [cite_start]**Fallacy Detection**: Heuristically detects logical fallacies such as *Slippery Slope*, *False Dilemma*, and *Appeal to Fear*[cite: 141, 1120].
 
-### 3. 📈 Historical Claim Trajectory
-- **Timeline Tracking**: Visualizes how a claim has evolved over time.
-- **Source Frequency Analysis**: Identifies which domains are propagating the claim.
-- **Misinformation Risk Assessment**: Calculates a risk level (LOW/MEDIUM/HIGH) based on the spread and nature of sources.
+### 3. 📈 Misinformation Forecaster
+* [cite_start]**Trajectory Tracking**: Visualizes the historical evolution of political claims over time[cite: 12, 1134].
+* [cite_start]**Risk Assessment**: Calculates a **Misinformation Spread Risk Score** based on recurrence frequency and source credibility[cite: 105, 1126].
 
-## � How to Run
+---
 
-### Option 1: Local Code Editor (VS Code, PyCharm, Terminal)
+## 🏗 System Architecture
 
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/yourusername/political-intelligence-system.git
-   cd political-intelligence-system
-   ```
+The system operates on a modular pipeline:
+1.  [cite_start]**Ingestion**: Normalizes raw text and identifies check-worthy claims[cite: 61, 1016].
+2.  [cite_start]**Retrieval**: Multi-source gathering and DiskCache-optimized lookup[cite: 75, 127].
+3.  [cite_start]**Verification**: Cross-encoder reranking followed by LLM-based reasoning[cite: 77, 82].
+4.  [cite_start]**Analytics**: Parallel processing of sentiment, bias, and temporal drift[cite: 139, 147].
 
-2. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+---
 
-3. **Configure API Key**:
-   You need a **Tavily API Key** for the search functionality.
-   - Open `main.py`.
-   - Find `os.environ["TAVILY_API_KEY"] = " "`
-   - Insert your key: `os.environ["TAVILY_API_KEY"] = "tvly-..."`
+## 💻 Installation & Setup
 
-4. **Run the application**:
-   ```bash
-   python main.py
-   ```
-   The application will launch in your browser at `http://127.0.0.1:7860`.
-
-### Option 2: Google Colab
-
-1. Create a new Colab notebook.
-2. Copy the contents of `main.py` into a cell.
-3. Uncomment the first line to install dependencies:
-   ```python
-   !pip install gradio transformers sentence-transformers tavily-python wikipedia diskcache torch --quiet
-   ```
-4. Set your API key in the code:
-    ```python
-    os.environ["TAVILY_API_KEY"] = "YOUR_API_KEY"
+### Local Setup
+1.  **Clone the Repository**:
+    ```bash
+    git clone https://github.com/shyam10102005/A-Multi-Agent-Framework-for-Political-Discourse-Analysis-and-Misinformation-Forecasting.git
+    cd A-Multi-Agent-Framework-for-Political-Discourse-Analysis-and-Misinformation-Forecasting
     ```
-5. Run the cell. The Gradio interface will launch directly in the notebook.
+2.  **Install Dependencies**:
+    ```bash
+    pip install -r requirements.txt
+    ```
+3.  **Configure Environment**:
+    Add your **Tavily API Key** to your environment or `main.py`:
+    ```python
+    os.environ["TAVILY_API_KEY"] = "your_api_key_here"
+    ```
+4.  **Run Application**:
+    ```bash
+    python main.py
+    ```
 
-The application will launch a **Gradio** interface in your browser (usually at `http://127.0.0.1:7860`).
+### Google Colab Setup (Recommended for GPU Access)
+1.  Open a new notebook and set the runtime to **T4 GPU**.
+2.  Install requirements:
+    ```python
+    !pip install gradio transformers sentence-transformers tavily-python wikipedia diskcache torch --quiet
+    ```
+3.  Load your key securely:
+    ```python
+    from google.colab import userdata
+    os.environ["TAVILY_API_KEY"] = userdata.get('TAVILY_API_KEY')
+    ```
+
+---
 
 ## 📚 Tech Stack
-
-- **Frontend**: Gradio
-- **LLM**: Google Flan-T5 (`google/flan-t5-base`)
-- **Search**: Tavily API, Wikipedia API
-- **NLP**: Transformers (Hugging Face), Sentence Transformers
-- **Sentiment Analysis**: DistilBERT
-- **Caching**: DiskCache
+* [cite_start]**Core**: Python 3.10+, PyTorch [cite: 160]
+* [cite_start]**Models**: Flan-T5 (Reasoning), DistilBERT (Sentiment), MiniLM (Reranking) 
+* [cite_start]**Data**: Tavily Search API, Wikipedia API [cite: 126]
+* [cite_start]**UI/UX**: Gradio [cite: 128]
 
 ## 🤝 Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
+Contributions are welcome! Please feel free to submit a Pull Request or open an issue for new fallacy detection heuristics or additional data sources.
