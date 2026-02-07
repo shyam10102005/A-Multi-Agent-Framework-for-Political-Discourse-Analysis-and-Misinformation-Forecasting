@@ -1,5 +1,4 @@
-# 🧠 Political Intelligence System
-**A Multi-Agent Framework for Political Discourse Analysis and Misinformation Forecasting**
+# 🧠 A Multi-Agent Framework for Political Discourse Analysis and Misinformation Forecasting
 
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![Gradio](https://img.shields.io/badge/UI-Gradio-orange.svg)](https://gradio.app/)
